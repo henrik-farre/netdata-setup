@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Netdata</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <script src="/dashboards/NoSleep.min.js"></script>
+  <script>
+  var netdataTheme = 'slate';
+
+  function launchFullscreen(element) {
+    if(element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if(element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if(element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if(element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+
+    document.getElementById("actions").style.display = 'none';
+  }
+
+  var noSleep = new NoSleep();
+
+  function enableNoSleep() {
+    noSleep.enable();
+    document.removeEventListener('touchstart', enableNoSleep, false);
+  }
+
+  document.addEventListener('touchstart', enableNoSleep, false);
+
+  </script>
+  <script type="text/javascript" src="/dashboard.js?v20190902-0"></script>
+</head>
+<body>
+
+  <div id="actions">
+    <button onclick="launchFullscreen(document.documentElement);">Launch Fullscreen</button>
+  </div>
+
+  <div class="dashboard-subsection">
+    <div class="netdata-chart-row">
+      <div
+      data-netdata="system.io"
+      data-dimensions="in"
+      data-chart-library="easypiechart"
+      data-title="Disk Read"
+      data-width="11%"
+      data-points="300"
+      data-common-units="system.io.mainhead">
+      </div>
+      <div
+      data-netdata="system.io"
+      data-dimensions="out"
+      data-chart-library="easypiechart"
+      data-title="Disk Write"
+      data-width="11%"
+      data-points="300"
+      data-common-units="system.io.mainhead">
+      </div>
+      <div
+      data-netdata="system.ram"
+      data-dimensions="used|buffers|active|wired"
+      data-append-options="percentage"
+      data-chart-library="easypiechart"
+      data-title="Used RAM"
+      data-units="%"
+      data-easypiechart-max-value="100"
+      data-width="11%"
+      data-points="300"
+      data-colors="#EE9911">
+      </div>
+      <div
+      data-netdata="system.cpu"
+      data-chart-library="gauge"
+      data-title="CPU"
+      data-units="%"
+      data-gauge-max-value="100"
+      data-width="20%"
+      data-points="300"
+      data-colors="#22AA99">
+      </div>
+      <div
+      data-netdata="system.net"
+      data-dimensions="received"
+      data-chart-library="easypiechart"
+      data-title="Net Inbound"
+      data-width="11%"
+      data-points="300"
+      data-common-units="system.net.mainhead">
+      </div>
+      <div
+      data-netdata="system.net"
+      data-dimensions="sent"
+      data-chart-library="easypiechart"
+      data-title="Net Outbound"
+      data-width="11%"
+      data-points="300"
+      data-common-units="system.net.mainhead">
+      </div>
+    </div>
+    <div class="netdata-chart-row">
+      <div
+      data-netdata="cpu.cpufreq"
+      data-width="100%"
+      data-height="260px"
+      data-dygraph-valuerange="[null, null]"
+      data-decimal-digits="-1"
+      data-legend-position="bottom" style="height: 260px; width: 100%;">
+      </div>
+    </div>
+    <div class="netdata-chart-row">
+      <div
+      data-netdata="system.cpu"
+      data-width="25%"
+      data-height="65px"
+      data-chart-library="dygraph"
+      data-dygraph-theme="sparkline"
+      data-dimensions="iowait"
+      data-title="IOwait"
+      data-show-value-of-iowait-at="iowait" style="height: 65px; width: 25%;">
+      </div>
+      <div id="iowait"></div>
+    </div>
+  </div>
+</body>
+</html>
